@@ -1,0 +1,7 @@
+# Jupyter directories
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Dataset directories
+output/
+*/output/
