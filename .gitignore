@@ -5,3 +5,25 @@
 # Dataset directories
 output/
 */output/
+
+# Tmp folders
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
