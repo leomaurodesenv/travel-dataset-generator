@@ -4,13 +4,10 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #- Import packages
-import tqdm
-import names
-import random
 import pandas as pd
 from datetime import datetime as dt
-from datetime import timedelta as td
 
+#- Local packages
 import companiesModule
 import agenciesModule
 import placesModule
@@ -42,7 +39,7 @@ defAgenciesName = ['FlyingDrops', 'Rainbow', 'CloudFy']
 defPlacesName = ['Sao Paulo (SP)', 'Rio de Janeiro (RJ)', 'Santa Catarina (SC)']
 defPlaces = {name: dict() for name in defPlacesName}
 defDistancesInterval = {'min': 200.0, 'max': 850.0}
-defPlaceTravelKmPerHour = 400.0 
+defPlaceTravelKmPerHour = 400.0
 
 #-- Lodge (Accommodation)
 defLodgesInterval = {'min': 1, 'max': 3}
@@ -71,7 +68,7 @@ def getCompanies(defCompanies):
     companies = defCompanies.copy()
     for company, data in companies.items():
         users = list()
-        for idx in range(data['usersCount']):
+        for _ in range(data['usersCount']):
             user = companiesModule.funcUserGenerator(defGenders, defAgesInterval, defFlightsInterval, userId)
             users.append(user)
             userId += 1
@@ -140,7 +137,7 @@ def main():
     #- Places to travel
     places = getPlaces(defPlaces, defPlacesName, \
                        defDistancesInterval, defPlaceTravelKmPerHour)
-    
+
     #- Hotels
     lodges = getLodges(defPlacesName, defLodges, defLodgesInterval, defLodgesPrices)
 
@@ -149,9 +146,9 @@ def main():
     flightsPossibilities = travelsPosModule.funcFlightsPossibilities(places, agencies, defTravelsFlightPrices, defFlightTypes)
     lodgesPossibilities  = travelsPosModule.funcLodgesPossibilities(lodges, defPlacesName)
     flightsSimulated, lodgesSimulated = \
-        travelsModule.funcTravelsSimulated(companies, flightsPossibilities, lodgesPossibilities, 
+        travelsModule.funcTravelsSimulated(companies, flightsPossibilities, lodgesPossibilities, \
             defTravelDate, defTravelsDays, defTravelWithLodge, defPlacesName)
-    
+
     #-------------------------------------------------
     #- Save data
     dfUsers   = pd.DataFrame(getUsers(companies))

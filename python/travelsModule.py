@@ -40,10 +40,10 @@ def funcTravelsSimulated(companies, flightsPossibilities, lodgesPossibilities, t
     dfFlightsPos = pd.DataFrame(flightsPossibilities)
     dfLodgesPos = pd.DataFrame(lodgesPossibilities)
     flightsSimulated, lodgesSimulated = list(), list()
-    for (companyName, companyData) in companies.items():
+    for (_companyName, companyData) in companies.items():
         for user in companyData['users']:
             date = travelDate['init']
-            for i in range(user['flights']):
+            for _ in range(user['flights']):
                 # random - days, places, hotel?
                 daysFlight = random.randint(travelsDays['min'], travelsDays['max'])
                 daysNextTravel = random.randint(travelDate['interval']['min'], travelDate['interval']['min'])
