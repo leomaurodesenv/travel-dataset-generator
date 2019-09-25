@@ -4,6 +4,7 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #- Import packages
+from time import process_time
 import pandas as pd
 from datetime import datetime as dt
 
@@ -155,10 +156,17 @@ def main():
     dfFlights = pd.DataFrame(flightsSimulated)
     dfLodges  = pd.DataFrame(lodgesSimulated)
 
+    print('Number of users: %d' % len(dfUsers))
+    print('Number of flights: %d' % len(dfFlights))
+    print('Number of hotels: %d' % len(dfLodges))
+
     df2csvOutput(dfUsers, defOutputUsers, defOutputFolder, 'users')
     df2csvOutput(dfFlights, defOutputFlights, defOutputFolder, 'flights')
     df2csvOutput(dfLodges, defOutputLodges, defOutputFolder, 'hotels')
 
 
 if __name__ == "__main__":
+    t_start = process_time()
     main()
+    t_stop = process_time()
+    print("Time during: %.2fs" % t_stop-t_start)

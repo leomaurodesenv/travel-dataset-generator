@@ -74,5 +74,5 @@ def funcTravelsSimulated(companies, flightsPossibilities, lodgesPossibilities, t
                 flightsSimulated.append(tmpFlightFrom)
                 flightsSimulated.append(tmpFlightTo)
                 travelCode += 1
-                date = dt.now() + td(days=daysNextTravel)
+                date = date + td(days=daysNextTravel)
     return flightsSimulated, lodgesSimulated
