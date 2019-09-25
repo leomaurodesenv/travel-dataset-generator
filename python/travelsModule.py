@@ -1,7 +1,6 @@
 #- Import packages
 import random
 import pandas as pd
-from datetime import datetime as dt
 from datetime import timedelta as td
 
 '''
