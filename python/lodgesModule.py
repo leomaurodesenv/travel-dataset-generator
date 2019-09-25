@@ -40,7 +40,7 @@ def funcLodgesGenerator(lodgesInterval, lodgesPrices):
     global defName
     lodges = list()
     n = random.randint(lodgesInterval['min'], lodgesInterval['max'])
-    for i in range(n):
+    for _ in range(n):
         lodgeName = '%s %s' % (defLodgesPrex, defName)
         price = round(random.uniform(lodgesPrices['min'], lodgesPrices['max']), 2)
         lodge = {'code': defName, 'name': lodgeName, 'price': price}

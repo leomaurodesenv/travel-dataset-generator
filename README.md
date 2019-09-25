@@ -1,5 +1,9 @@
 # travel-dataset-generator
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8fcf18fb09594cbe8a8bdf0f7493b2f5)](https://www.codacy.com/manual/leomaurodesenv/travel-dataset-generator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=leomaurodesenv/travel-dataset-generator&amp;utm_campaign=Badge_Grade)
+
+---
+
 In this repository, we present the _first_ travel dataset generator of the GitHub.  
 
 This dataset serves as a good base for **Data Mining** learning models, including, but not limited to, supervised learning (_e.g._ , Classification, Regression) and unsupervised learning (_e.g._ , Clustering).  
@@ -14,7 +18,7 @@ Run dataset generator `python/main.py`:
 python main.py
 ```
 
-Probabilities personalization:
+Probabilities customization:
 ```python
 #-----------------------------------------------------
 #- Companies and Users
@@ -74,7 +78,7 @@ defTravelDate = {'init': datetime, 'interval':{'min': int, 'max': int}}
 ## Notebook
 
 Step-by-step of the generator:   
-- [Overview: Dataset Generator](jupyter/generator-example.ipynb)
+-   [Overview: Dataset Generator](jupyter/generator-example.ipynb)
 
 ---
 ## License
@@ -84,4 +88,4 @@ This generator is available for researchers and data scientists under the [Creat
 ---
 ## Also look ~
 
-- Created by [Argo Solutions](https://github.com/Argo-Solutions/) - http://useargo.com
+-   Created by [Argo Solutions](https://github.com/Argo-Solutions/) - <http://useargo.com>
