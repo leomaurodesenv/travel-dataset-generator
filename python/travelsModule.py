@@ -1,7 +1,6 @@
 #- Import packages
 import random
 import pandas as pd
-from datetime import datetime as dt
 from datetime import timedelta as td
 
 '''
@@ -74,5 +73,5 @@ def funcTravelsSimulated(companies, flightsPossibilities, lodgesPossibilities, t
                 flightsSimulated.append(tmpFlightFrom)
                 flightsSimulated.append(tmpFlightTo)
                 travelCode += 1
-                date = dt.now() + td(days=daysNextTravel)
+                date = date + td(days=daysNextTravel)
     return flightsSimulated, lodgesSimulated
