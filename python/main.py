@@ -5,8 +5,9 @@
 
 #- Import packages
 from time import process_time
-import pandas as pd
 from datetime import datetime as dt
+import pandas as pd
+import random
 
 #- Local packages
 import companiesModule
@@ -27,6 +28,7 @@ defCompanies = {
     'HHD': {'usersCount': 2},
     '4You': {'usersCount': 3},
 }
+defCompaniesPlacesInterval = {'min': 1, 'max': 3}
 
 #-- Flight Agencies
 defAgencies = dict()
@@ -64,10 +66,16 @@ defOutputLodges  = ['travelCode', 'userCode', 'name', 'place', 'days', 'price', 
 
 #-----------------------------------------------------
 #- Functions
-def getCompanies(defCompanies):
+def getCompanies(defCompanies, defCompPlacesInterval, defPlacesName):
     userId = 0
     companies = defCompanies.copy()
     for company, data in companies.items():
+        # Places
+        random.shuffle(defPlacesName)
+        numOfPlaces = random.randint(defCompPlacesInterval['min'], \
+                                     defCompPlacesInterval['max'])
+        companies[company]['places'] = [defPlacesName[i] for i in range(numOfPlaces)]
+        # Users
         users = list()
         for _ in range(data['usersCount']):
             user = companiesModule.funcUserGenerator(defGenders, defAgesInterval, defFlightsInterval, userId)
@@ -130,10 +138,18 @@ def df2csvOutput(df, columns, path, fileName):
 def main():
     #-------------------------------------------------
     #- Companies and users
-    companies = getCompanies(defCompanies)
+    companies = getCompanies(defCompanies, defCompaniesPlacesInterval, defPlacesName)
+
+    print('- Companies')
+    for (key, company) in companies.items():
+        print(key, company['places'])
 
     #- Flight agencies
     agencies = getAgencies(defAgencies, defAgenciesName)
+
+    print('\n- Agencies')
+    for (key, agency) in agencies.items():
+        print(key, agency)
 
     #- Places to travel
     places = getPlaces(defPlaces, defPlacesName, \
@@ -146,16 +162,17 @@ def main():
     #- Simulation
     flightsPossibilities = travelsPosModule.funcFlightsPossibilities(places, agencies, defTravelsFlightPrices, defFlightTypes)
     lodgesPossibilities  = travelsPosModule.funcLodgesPossibilities(lodges, defPlacesName)
-    flightsSimulated, lodgesSimulated = \
-        travelsModule.funcTravelsSimulated(companies, flightsPossibilities, lodgesPossibilities, \
-            defTravelDate, defTravelsDays, defTravelWithLodge, defPlacesName)
 
     #-------------------------------------------------
     #- Save data
+    flightsSimulated, lodgesSimulated = \
+        travelsModule.funcTravelsSimulated(companies, flightsPossibilities, lodgesPossibilities, \
+        defTravelDate, defTravelsDays, defTravelWithLodge, defPlacesName)
     dfUsers   = pd.DataFrame(getUsers(companies))
     dfFlights = pd.DataFrame(flightsSimulated)
     dfLodges  = pd.DataFrame(lodgesSimulated)
 
+    print('\n- Data')
     print('Number of users: %d' % len(dfUsers))
     print('Number of flights: %d' % len(dfFlights))
     print('Number of hotels: %d' % len(dfLodges))
@@ -169,4 +186,4 @@ if __name__ == "__main__":
     t_start = process_time()
     main()
     t_stop = process_time()
-    print("Time during: %.2fs" % t_stop-t_start)
+    print("Time during:", (t_stop-t_start))

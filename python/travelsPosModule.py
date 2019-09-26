@@ -24,7 +24,7 @@ def funcCalculatePrice(priceMin, priceMax, weight):
     return price
 
 
-def funcElaborateflight(fromPlace, toPlace, distance, agency, flightTypes, flightType, \
+def funcElaborateflight(arr, fromPlace, toPlace, distance, agency, flightTypes, flightType, \
                         priceA, priceB, time, timeMsg):
     '''
     Elaborate a possible flight.
@@ -43,7 +43,7 @@ def funcElaborateflight(fromPlace, toPlace, distance, agency, flightTypes, fligh
     flight = {'from': fromPlace, 'to': toPlace, 'distance': distance,
               'agency': agency, 'flightType': flightType, 'price': price,
               'time': time, 'timeMsg': timeMsg}
-    return flight
+    arr.append(flight)
 
 
 def funcFlightsPossibilities(places, agencies, flightPrices, flightTypes):
@@ -63,14 +63,13 @@ def funcFlightsPossibilities(places, agencies, flightPrices, flightTypes):
             for (agencyName, agencyData) in agencies.items():
                 if len(agencyData['types']) > 1: # has more than 1 element
                     for typeA in agencyData['types']:
-                        flight = funcElaborateflight(fromPlace, toPlace, placeData['distance'], \
-                                                     agencyName, flightTypes, typeA, priceA, priceB, \
-                                                     placeData['time'], placeData['timeMsg'])
+                        funcElaborateflight(flightsPossibilities, fromPlace, toPlace, placeData['distance'], \
+                                            agencyName, flightTypes, typeA, priceA, priceB, \
+                                            placeData['time'], placeData['timeMsg'])
                 else:
                     typeA = agencyData['types'][0]
-                    flight = funcElaborateflight(fromPlace, toPlace, placeData['distance'], agencyName, flightTypes, \
-                                                 typeA, priceA, priceB, placeData['time'], placeData['timeMsg'])
-                flightsPossibilities.append(flight)
+                    funcElaborateflight(flightsPossibilities, fromPlace, toPlace, placeData['distance'], agencyName, flightTypes, \
+                                        typeA, priceA, priceB, placeData['time'], placeData['timeMsg'])
             # Update prices for bigger distances
             priceA, priceB = priceB, priceB + flightPrices['interval']
     return flightsPossibilities
