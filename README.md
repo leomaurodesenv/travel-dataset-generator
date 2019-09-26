@@ -34,6 +34,8 @@ defCompanies = {
     'ABC': {'usersCount': int},
     'DEC': {'usersCount': int}, ...
 }
+#-- Number of Places of a Company
+defCompaniesPlacesInterval = {'min': int, 'max': int}
 
 #-----------------------------------------------------
 #- Flight Agencies

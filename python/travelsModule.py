@@ -46,15 +46,23 @@ def funcTravelsSimulated(companies, flightsPossibilities, lodgesPossibilities, t
                 # random - days, places, hotel?
                 daysFlight = random.randint(travelsDays['min'], travelsDays['max'])
                 daysNextTravel = random.randint(travelDate['interval']['min'], travelDate['interval']['min'])
-                fromPlace, toPlace = random.sample(placesName, 2)
                 chanceTravelWithLodge = (random.randrange(100) < travelWithLodge*100)
+                #- places
+                #--- from
+                random.shuffle(companyData['places'])
+                fromPlace = companyData['places'][0]
+                #--- to
+                tmpPlacesName = placesName.copy()
+                tmpPlacesName.remove(fromPlace)
+                random.shuffle(tmpPlacesName)
+                toPlace = tmpPlacesName[0]
                 # travels
                 fromConditions = (dfFlightsPos['from']==fromPlace) & (dfFlightsPos['to']==toPlace)
                 tmpFlightFrom  = df2Dict(dfFlightsPos[fromConditions].sample(n=1))
                 toConditions = (dfFlightsPos['from']==toPlace) & (dfFlightsPos['to']==fromPlace) & \
                                (dfFlightsPos['agency']==tmpFlightFrom['agency']) & \
                                (dfFlightsPos['flightType']==tmpFlightFrom['flightType'])
-                tmpFlightTo  = df2Dict(dfFlightsPos[toConditions])
+                tmpFlightTo  = df2Dict(dfFlightsPos[toConditions].sample(n=1))
                 tmpFlightFrom['userCode'] = tmpFlightTo['userCode'] = user['code']
                 tmpFlightFrom['travelCode'] = tmpFlightTo['travelCode'] = travelCode
                 tmpFlightFrom['date'] = date
