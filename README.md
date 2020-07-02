@@ -90,4 +90,5 @@ This generator is available for researchers and data scientists under the [Creat
 ---
 ## Also look ~
 
+-   License [MIT](LICENSE)
 -   Created by [Argo Solutions](https://github.com/Argo-Solutions/) - <http://useargo.com>
